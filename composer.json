@@ -5,13 +5,13 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Batlify\\CurrencyConversion\\": "src/"
+      "Batlify\\CurrenciesConversion\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Batlify\\CurrencyConversion\\CurrencyConversionServiceProvider"
+        "Batlify\\CurrenciesConversion\\CurrenciesConversionServiceProvider"
       ]
     }
   },

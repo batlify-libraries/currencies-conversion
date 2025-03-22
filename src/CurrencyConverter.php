@@ -1,6 +1,6 @@
 <?php
 
-namespace Batlify\CurrencyConversion;
+namespace Batlify\CurrenciesConversion;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
