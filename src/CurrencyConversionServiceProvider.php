@@ -1,6 +1,6 @@
 <?php
 
-namespace Batlify\CurrenciesConversion;
+namespace Batlify\CurrencyConversion;
 
 use Illuminate\Support\ServiceProvider;
 
