@@ -9,19 +9,15 @@ use InvalidArgumentException;
 
 final class CurrencyConverter
 {
-    public function __construct(
-        private readonly array $supportedCurrencies = []
-    ) {}
-
-    public function convert(
+    public static function convert(
         float $amount,
         string $toCurrency,
         ?string $fromCurrency = null
     ): float {
         $fromCurrency ??= Config::get('currencies-conversion.default_currency', 'CZK');
-        $this->validateCurrencies($toCurrency, $fromCurrency);
+        self::validateCurrencies($toCurrency, $fromCurrency);
 
-        $rates = $this->getCnbRates();
+        $rates = self::getCnbRates();
 
         $fromRate = $rates[$fromCurrency] ?? throw new InvalidArgumentException("Currency [$fromCurrency] is not available from CNB rates");
         $toRate = $rates[$toCurrency] ?? throw new InvalidArgumentException("Currency [$toCurrency] is not available from CNB rates");
@@ -29,7 +25,7 @@ final class CurrencyConverter
         return round(($amount * $fromRate) / $toRate, 2);
     }
 
-    private function getCnbRates(): array
+    private static function getCnbRates(): array
     {
         $url = 'https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt';
         $response = Http::get($url);
@@ -38,10 +34,10 @@ final class CurrencyConverter
             throw new RuntimeException('Failed to fetch CNB rates');
         }
 
-        return $this->parseCnbResponse($response->body());
+        return self::parseCnbResponse($response->body());
     }
 
-    private function parseCnbResponse(string $body): array
+    private static function parseCnbResponse(string $body): array
     {
         $rates = collect(explode("\n", $body))
             ->filter(fn($line) => str_contains($line, '|'))
@@ -66,9 +62,9 @@ final class CurrencyConverter
         return $rates;
     }
 
-    private function validateCurrencies(string $toCurrency, string $fromCurrency): void
+    private static function validateCurrencies(string $toCurrency, string $fromCurrency): void
     {
-        $supported = $this->supportedCurrencies ?: Config::get('currencies-conversion.supported_currencies', []);
+        $supported = Config::get('currencies-conversion.supported_currencies', []);
 
         foreach ([$toCurrency, $fromCurrency] as $currency) {
             if (! in_array($currency, $supported, true)) {
