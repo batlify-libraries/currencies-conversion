@@ -11,7 +11,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Batlify\\CurrenciesConversion\\CurrenciesConversionServiceProvider"
+        "Batlify\\CurrencyConversion\\CurrencyConversionServiceProvider"
       ]
     }
   },

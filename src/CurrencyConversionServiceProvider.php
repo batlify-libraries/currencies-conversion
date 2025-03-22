@@ -4,7 +4,7 @@ namespace Batlify\CurrenciesConversion;
 
 use Illuminate\Support\ServiceProvider;
 
-class CurrenciesConversionServiceProvider extends ServiceProvider
+class CurrencyConversionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
