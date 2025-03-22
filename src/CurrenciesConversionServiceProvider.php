@@ -10,7 +10,7 @@ class CurrenciesConversionServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/currencies-conversion.php' => config_path('currencies-conversion.php'),
-        ], 'config');
+        ], 'currencies-conversion-config');
     }
 
     public function register()

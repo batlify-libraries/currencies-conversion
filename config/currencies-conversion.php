@@ -24,6 +24,7 @@ return [
     */
 
     'supported_currencies' => [
+        'CZK',
         'AUD',
         'BRL',
         'BGN',
